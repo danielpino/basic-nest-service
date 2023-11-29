@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ItemController } from './item.controller';
 import { ItemService } from './item.service';
 
-describe('AppController', () => {
+describe('ItemController', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
@@ -12,10 +12,17 @@ describe('AppController', () => {
     }).compile();
   });
 
-  describe('getHello', () => {
+  describe('GET', () => {
     it('should return "Hello World!"', () => {
-      const appController = app.get(ItemController);
-      expect(appController.getHello()).toBe('Hello Items!!');
+      const itemController = app.get(ItemController);
+      expect(itemController.getHello()).toBe('Hello Items!!');
+    });
+  });
+
+  describe('POST', () => {
+    it('should return the item name', () => {
+      const itemController = app.get(ItemController);
+      expect(itemController.postItem({ name: 'banger' })).toBe('banger');
     });
   });
 });

@@ -1,12 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ItemService } from './item.service';
+import { CreateItemDto } from './item.dto';
 
-@Controller()
+@Controller('/items')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
-  @Get('/item')
+  @Get('/')
   getHello(): string {
-    return this.itemService.getHello();
+    return this.itemService.getItems();
+  }
+
+  @Post('/')
+  postItem(@Body() item: CreateItemDto): string {
+    console.log('param item:', item);
+    return this.itemService.postItem(item);
   }
 }
