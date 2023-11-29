@@ -12,17 +12,22 @@ describe('ItemController', () => {
     }).compile();
   });
 
-  describe('GET', () => {
+  describe('GET ALL', () => {
     it('should return "Hello World!"', () => {
       const itemController = app.get(ItemController);
-      expect(itemController.getHello()).toBe('Hello Items!!');
+      expect(itemController.getAll()).toBe('Hello Items!!');
     });
   });
 
   describe('POST', () => {
     it('should return the item name', () => {
       const itemController = app.get(ItemController);
-      expect(itemController.postItem({ name: 'banger' })).toBe('banger');
+      expect(itemController.post({ name: 'banger' })).toBe('banger');
+    });
+
+    it('should persist through a GET call the item name', () => {
+      const itemController = app.get(ItemController);
+      expect(itemController.post({ name: 'banger' })).toBe('banger');
     });
   });
 });

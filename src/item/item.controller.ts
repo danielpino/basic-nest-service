@@ -4,16 +4,15 @@ import { CreateItemDto } from './item.dto';
 
 @Controller('/items')
 export class ItemController {
-  constructor(private readonly itemService: ItemService) {}
+  constructor(private itemService: ItemService) {}
 
-  @Get('/')
-  getHello(): string {
-    return this.itemService.getItems();
+  @Get()
+  getAll(): string {
+    return this.itemService.getAllItems();
   }
 
-  @Post('/')
-  postItem(@Body() item: CreateItemDto): string {
-    console.log('param item:', item);
-    return this.itemService.postItem(item);
+  @Post()
+  post(@Body() createItemDto: CreateItemDto): string {
+    return this.itemService.postItem(createItemDto);
   }
 }
